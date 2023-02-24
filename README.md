@@ -1,4 +1,5 @@
-FIFA Nuestro
+FIFA:
+
 Este programa permite a los usuarios comprar jugadores de fútbol para su equipo personalizado. El usuario puede elegir de qué posición desea comprar jugadores, y cada posición tendrá diferentes jugadores para elegir. El programa también permite a los usuarios ver su equipo en cualquier momento.
 
 Cómo funciona el programa
