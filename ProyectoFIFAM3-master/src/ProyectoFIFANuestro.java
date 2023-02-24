@@ -1,5 +1,3 @@
-import java.awt.datatransfer.FlavorListener;
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class ProyectoFIFANuestro {
@@ -33,14 +31,14 @@ public class ProyectoFIFANuestro {
     static final String RESET = "\u001B[0m";
 
     static String[][] jugadores;
-
-
-
+    public static int variable[] = new int [5];
+    public static int contadorJugadors = 0;
 
     public static void main(String[] args) {
         Scanner llegir = new Scanner(System.in);
 
         int puntosUsuario = 200;
+
 
         jugadores = initJugadores();
 
@@ -220,7 +218,6 @@ public class ProyectoFIFANuestro {
         return jugadores;
     }
 
-
     public static int comprarJugadores(){
         Scanner llegir = new Scanner(System.in);
 
@@ -231,7 +228,7 @@ public class ProyectoFIFANuestro {
         do {
             System.out.println("");
 
-            System.out.print("De que posicion quieres comprar al jugador?: \n(1) Portero \n(2) Defensa \n(3) Medio \n(4) Delantero ");
+            System.out.print("De que posicion quieres elegir al jugador?: \n(1) Portero \n(2) Defensa \n(3) Medio \n(4) Delantero ");
             posicion = llegir.nextInt();
             System.out.println("");
 
@@ -246,7 +243,7 @@ public class ProyectoFIFANuestro {
         System.out.println("");
 
 
-        System.out.println("Elige el nombre del jugador que quieres comprar: ");
+        System.out.println("Elige el nombre del jugador que quieres elegir: ");
         int jugadores = llegir.nextInt();
 
         return comprarJugadores();
@@ -258,44 +255,82 @@ public class ProyectoFIFANuestro {
         int eleccion = 0;
         String posicion="";
 
-        System.out.print("De que posicion quieres comprar al jugador?: \n(1) Portero \n(2) Defensa \n(3) Medio \n(4) Delantero ");
-        eleccion = llegir.nextInt();
-        llegir.nextLine();
-
-
-        switch (eleccion) {
-            case 1:
-                posicion = "Portero";
-                break;
-            case 2:
-                posicion = "Defensa";
-                break;
-            case 3:
-                posicion = "Medio";
-                break;
-            case 4:
-                posicion = "Delantero";
-            case 5:
-                verMiPlantilla("Has elegido ver tu plantilla?" + "\n" + "(1)--> Sí"+ "(2)--> No");
-            default:
-                System.out.println("Posición no válida!");
-                break;
-        }
-
-        int idJugador = -1;
-
         do {
+
+            System.out.println("De que posicion quieres elegir al jugador: \n\t(1) Portero \n\t(2) Defensa \n\t(3) Medio \n\t(4) Delantero \n\t(5) Ver mi plantilla");
+            eleccion = llegir.nextInt();
+            llegir.nextLine();
+
+
+            switch (eleccion){
+                case 1:
+                    posicion = "Portero";
+                    break;
+                case 2:
+                    posicion = "Defensa";
+                    break;
+                case 3:
+                    posicion = "Medio";
+                    break;
+                case 4:
+                    posicion = "Delantero";
+                    break;
+                case 5:
+                    verMiPlantilla("Mi plantilla");
+                default:
+                    System.out.println("Posición no válida!");
+                    break;
+            }
+
+
+            int idJugador = -1;
+
+
             imprimirJugadoresPosicion(posicion);
             idJugador = elegirJugadorPosicion(posicion);
-        }while (idJugador == -1);
+            variable[contadorJugadors] = contadorJugadors;
+            contadorJugadors++;
+            System.out.println(contadorJugadors);
+        }while (contadorJugadors < 5);
 
+        if (contadorJugadors==5){
+            verMiPlantilla("Mi plantilla");
+        }else{
+            System.out.println("Saliendo");
+        }
     }
 
-    private static String verMiPlantilla(String msg) {
+    public static String verMiPlantilla(String plantilla) {
+        Scanner leer = new Scanner(System.in);
+        boolean idJugador;
 
+        System.out.println("Quieres ver tu plantilla? (true/false): ");
+        idJugador = leer.nextBoolean();
+        leer.nextLine();
+
+        if (idJugador == true){
+            for (int i = 0; i > variable.length; i++) {
+                System.out.println("Los jugadores elegidos son: "
+                        + "\n"  + jugadores[i][2] + " " + variable[0]
+                        + "\n" + jugadores[i][2] + " " + variable[1]
+                        + "\n" + jugadores[i][2] + " " + variable[2]
+                        + "\n" + jugadores[i][2] + " " + variable[3]
+                        + "\n" + jugadores[i][2] + " " + variable[4]);
+            }
+        }else{
+            System.out.println("Vale...");
+            System.out.println("");
+            buscarJugadoresPosicion();
+        }
+        return plantilla;
     }
 
-    private static int elegirJugadorPosicion(String posicion) {
+    /**
+     * El usuario tiene que escoger a los jugadores que quiere para su equipo por su id
+     * @param posicion Hay 4 posiciones diferentes, y los separa a los jugadores por la posicion
+     * @return Devuelve la id del jugador
+     */
+    public static int elegirJugadorPosicion(String posicion) {
         Scanner llegir = new Scanner(System.in);
 
         int idJugador = -1;
@@ -306,7 +341,7 @@ public class ProyectoFIFANuestro {
         if (idJugador > 0 && idJugador < jugadores.length){
             if (jugadores[idJugador][2].equalsIgnoreCase(posicion)){
                 System.out.println("Muy bien, has elegido " + jugadores[idJugador][0] + " buena suerte chaval/a");
-                System.out.println(YELLOW + "De momento tienes a un " + posicion + " --> " + jugadores[idJugador][0] + RESET);
+                System.out.println(YELLOW + "Has elegido a un " + posicion + " --> " + jugadores[idJugador][0] + RESET);
             }else{
                 System.out.println("");
                 System.out.println(RED + "ERROR: Has elegido un idJugador que no es " + posicion + RESET);
@@ -321,14 +356,13 @@ public class ProyectoFIFANuestro {
         return idJugador;
     }
 
-    private static void imprimirJugadoresPosicion(String posicion){
+    public static void imprimirJugadoresPosicion(String posicion){
         for (int i = 0; i < jugadores.length; i++) {
             if (jugadores[i][2].equalsIgnoreCase(posicion)){
                 System.out.println("["+i+"] -> " +  jugadores[i][0]);
             }
         }
     }
-
 
     /**
      * Es una lecutra del entero con control de errores
