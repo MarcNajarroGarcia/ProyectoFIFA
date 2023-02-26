@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class ProyectoFIFA {
 
-                                             //PROGRAMA FIFA
+                                                                     //PROGRAMA FIFA
 
 //De que va el programa:
 
@@ -52,7 +52,6 @@ public class ProyectoFIFA {
      * @param args
      */
     public static void main(String[] args) {
-        Scanner llegir = new Scanner(System.in);
 
         jugadores = initJugadores();
 
@@ -251,7 +250,7 @@ public class ProyectoFIFA {
             posicion = llegirInt("");
             System.out.println("");
 
-            if (posicion == 1 || posicion == 2 || posicion == 3 || posicion==4) {
+            if (posicion == 1 || posicion == 2 || posicion == 3 || posicion == 4) {
                 valorCorrecte = true;
             } else{
                 System.out.println("Por favor ingrese una de las opciones válidas.");
@@ -305,14 +304,14 @@ public class ProyectoFIFA {
         }
 
 
-        int idJugador = -1;
+        int idJugador;
 
 
             imprimirJugadoresPosicion(posicion);
             idJugador = elegirJugadorPosicion(posicion);
             variable[contadorJugadors] = contadorJugadors;
             contadorJugadors++;
-            System.out.println("Llevas " + contadorJugadors + " elegidos");
+            System.out.println(BLUE + "Llevas " + contadorJugadors + " elegidos" + RESET);
             System.out.println("");
         }while (contadorJugadors < 5);
 
@@ -345,7 +344,7 @@ public class ProyectoFIFA {
     public static int elegirJugadorPosicion(String posicion) {
         Scanner llegir = new Scanner(System.in);
 
-        int idJugador = -1;
+        int idJugador;
         int i = 0;
 
 
@@ -355,7 +354,7 @@ public class ProyectoFIFA {
 
             if (idJugador > 0 && idJugador < jugadores.length){
                 if (jugadores[idJugador][2].equalsIgnoreCase(posicion)){
-                    System.out.println("Muy bien, has elegido " + jugadores[idJugador][0] + " buena suerte chaval/a");
+                    System.out.println("Muy bien, has elegido " + jugadores[idJugador][0]);
                     System.out.println(YELLOW + "Has elegido a un " + posicion + " --> " + jugadores[idJugador][0] + RESET);
 
                     guardarJugadores[i] = jugadores[idJugador][0];
