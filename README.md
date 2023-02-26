@@ -1,3 +1,5 @@
+PROGRAMA DE MARC NAJARRO Y ÓSCAR PARRA:
+
 FIFA:
 
 Este programa permite a los usuarios comprar jugadores de fútbol para crear su equipo personalizado de 5 jugadores. El usuario puede elegir de qué posición desea comprar jugadores, y cada posición tendrá diferentes jugadores para elegir. El programa también permite a los usuarios ver su equipo en cualquier momento.
